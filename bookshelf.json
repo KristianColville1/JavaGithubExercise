@@ -9,7 +9,12 @@
                     "author": "J.R.R. Tolkien",
                     "year": "1937"
                 },
-                { "title": "1984", "author": "George Orwell", "year": "1949" }
+                { "title": "1984", "author": "George Orwell", "year": "1949" },
+                {
+                    "title": "Test Adding Book",
+                    "author": "Kristian Colville",
+                    "year": "2023"
+                }
             ]
         },
         {

@@ -16,6 +16,7 @@ public class Main {
         setUpBasicBookshelf();
         printBookshelf();
         buildBookShelf();
+        addBookToShelf();
     }
 
     public static void setUpBasicBookshelf() {
@@ -97,7 +98,7 @@ public class Main {
 
                 writer.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println(e);
             }
         }
     }
@@ -171,7 +172,38 @@ public class Main {
     }
 
     public static void writeBookToDatabase() {
-        
+        try {
+            FileWriter writer = new FileWriter("bookshelf.json");
+            writer.write("{\n\"bookshelf\": \"" + bookShelf.get(0) + "\",\n");
+
+            String[] categories = (String[]) bookShelf.get(1);
+            writer.write("\"categories\": [\n");
+            for (int i = 0; i < categories.length; i++) {
+                writer.write("  {\"name\": \"" + categories[i] + "\",\n");
+
+                String[][] books = (String[][]) bookShelf.get(2);
+                writer.write("   \"books\": [\n");
+                for (int j = 0; j < books[i].length; j++) {
+                    String[][][] bookDetails = (String[][][]) bookShelf.get(3);
+                    writer.write("    {\"title\": \"" + books[i][j] + "\",\n");
+                    writer.write("     \"author\": \"" + bookDetails[i][j][1] + "\",\n");
+                    writer.write("     \"year\": \"" + bookDetails[i][j][2] + "\"}");
+                    if (j < books[i].length - 1)
+                        writer.write(",");
+                    writer.write("\n");
+                }
+                writer.write("   ]\n");
+                if (i < categories.length - 1)
+                    writer.write("  },\n");
+                else
+                    writer.write("  }\n");
+            }
+            writer.write("]\n}");
+
+            writer.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
 }
