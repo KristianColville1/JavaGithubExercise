@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
 
 public class Main {
 
@@ -98,4 +101,77 @@ public class Main {
             }
         }
     }
+
+    private static String getInput(Scanner sc, String prompt, String validationRegex, String errorMessage) {
+        String input;
+        while (true) {
+            System.out.println(prompt);
+            input = sc.nextLine().trim();
+            if (input.matches(validationRegex)) {
+                return input;
+            }
+            System.out.println(errorMessage);
+        }
+    }
+
+    private static String getCategory(Scanner sc) {
+        return getInput(sc, "Enter category (Fiction or Non-Fiction):",
+                "Fiction|Non-Fiction", "Invalid category. Please enter 'Fiction' or 'Non-Fiction'.");
+    }
+
+    private static String getBookTitle(Scanner sc) {
+        return getInput(sc, "Enter book title:", ".+", "Book title cannot be empty.");
+    }
+
+    private static String getAuthor(Scanner sc) {
+        return getInput(sc, "Enter author name:", ".+", "Author name cannot be empty.");
+    }
+
+    private static String getYear(Scanner sc) {
+        return getInput(sc, "Enter publication year:", "\\d{4}", "Invalid year. Please enter a 4-digit year.");
+    }
+
+    public static void addBookToShelf() {
+        Scanner sc = new Scanner(System.in);
+        String category = getCategory(sc);
+        String title = getBookTitle(sc);
+        String author = getAuthor(sc);
+        String year = getYear(sc);
+
+        String[] categories = (String[]) bookShelf.get(1);
+        int categoryIndex = -1;
+        for (int i = 0; i < categories.length; i++) {
+            if (categories[i].equalsIgnoreCase(category)) {
+                categoryIndex = i;
+                break;
+            }
+        }
+
+        if (categoryIndex == -1) {
+            System.out.println("Category not found!");
+            return;
+        }
+
+        String[][] books = (String[][]) bookShelf.get(2);
+        String[][][] bookDetails = (String[][][]) bookShelf.get(3);
+
+        ArrayList<String> newBooksList = new ArrayList<>(Arrays.asList(books[categoryIndex]));
+        newBooksList.add(title);
+        books[categoryIndex] = newBooksList.toArray(new String[0]);
+
+        ArrayList<ArrayList<String>> newDetailsList = new ArrayList<>();
+        for (String[] detail : bookDetails[categoryIndex]) {
+            newDetailsList.add(new ArrayList<>(Arrays.asList(detail)));
+        }
+        newDetailsList.add(new ArrayList<>(Arrays.asList(title, author, year)));
+        bookDetails[categoryIndex] = newDetailsList.stream().map(l -> l.toArray(new String[0]))
+                .toArray(String[][]::new);
+
+        writeBookToDatabase();
+    }
+
+    public static void writeBookToDatabase() {
+        
+    }
+
 }
