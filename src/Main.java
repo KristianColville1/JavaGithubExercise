@@ -1,7 +1,9 @@
 package src;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Main {
 
@@ -10,6 +12,7 @@ public class Main {
     public static void main(String[] args) {
         setUpBasicBookshelf();
         printBookshelf();
+        buildBookShelf();
     }
 
     public static void setUpBasicBookshelf() {
@@ -56,5 +59,43 @@ public class Main {
         }
     }
 
+    public static void buildBookShelf() {
+        File file = new File("bookshelf.json");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+                FileWriter writer = new FileWriter(file);
 
+                writer.write("{\n\"bookshelf\": \"" + bookShelf.get(0) + "\",\n");
+
+                String[] categories = (String[]) bookShelf.get(1);
+                writer.write("\"categories\": [\n");
+                for (int i = 0; i < categories.length; i++) {
+                    writer.write("  {\"name\": \"" + categories[i] + "\",\n");
+
+                    String[][] books = (String[][]) bookShelf.get(2);
+                    writer.write("   \"books\": [\n");
+                    for (int j = 0; j < books[i].length; j++) {
+                        String[][][] bookDetails = (String[][][]) bookShelf.get(3);
+                        writer.write("    {\"title\": \"" + books[i][j] + "\",\n");
+                        writer.write("     \"author\": \"" + bookDetails[i][j][1] + "\",\n");
+                        writer.write("     \"year\": \"" + bookDetails[i][j][2] + "\"}");
+                        if (j < books[i].length - 1)
+                            writer.write(",");
+                        writer.write("\n");
+                    }
+                    writer.write("   ]\n");
+                    if (i < categories.length - 1)
+                        writer.write("  },\n");
+                    else
+                        writer.write("  }\n");
+                }
+                writer.write("]\n}");
+
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
