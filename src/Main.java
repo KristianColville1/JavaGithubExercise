@@ -116,6 +116,7 @@ public class Main {
     }
 
     private static String getCategory(Scanner sc) {
+        System.out.println("\n\n Add more books to the library here:\n");
         return getInput(sc, "Enter category (Fiction or Non-Fiction):",
                 "Fiction|Non-Fiction", "Invalid category. Please enter 'Fiction' or 'Non-Fiction'.");
     }
@@ -132,7 +133,8 @@ public class Main {
         return getInput(sc, "Enter publication year:", "\\d{4}", "Invalid year. Please enter a 4-digit year.");
     }
 
-    public static void addBookToShelf() {
+    // TODO: modify the method to write endlessely
+    public static void addBookToShelf() { 
         Scanner sc = new Scanner(System.in);
         String category = getCategory(sc);
         String title = getBookTitle(sc);

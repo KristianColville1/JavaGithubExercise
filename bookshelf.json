@@ -1,36 +1,28 @@
 {
-    "bookshelf": "My Bookshelf",
-    "categories": [
-        {
-            "name": "Fiction",
-            "books": [
-                {
-                    "title": "The Hobbit",
-                    "author": "J.R.R. Tolkien",
-                    "year": "1937"
-                },
-                { "title": "1984", "author": "George Orwell", "year": "1949" },
-                {
-                    "title": "Test Adding Book",
-                    "author": "Kristian Colville",
-                    "year": "2023"
-                }
-            ]
-        },
-        {
-            "name": "Non-Fiction",
-            "books": [
-                {
-                    "title": "Sapiens",
-                    "author": "Yuval Noah Harari",
-                    "year": "2011"
-                },
-                {
-                    "title": "A Brief History of Time",
-                    "author": "Stephen Hawking",
-                    "year": "1988"
-                }
-            ]
-        }
-    ]
+"bookshelf": "My Bookshelf",
+"categories": [
+  {"name": "Fiction",
+   "books": [
+    {"title": "The Hobbit",
+     "author": "J.R.R. Tolkien",
+     "year": "1937"},
+    {"title": "1984",
+     "author": "George Orwell",
+     "year": "1949"},
+    {"title": "Books are suprisingly fun",
+     "author": "Kristian Colville",
+     "year": "2023"}
+   ]
+  },
+  {"name": "Non-Fiction",
+   "books": [
+    {"title": "Sapiens",
+     "author": "Yuval Noah Harari",
+     "year": "2011"},
+    {"title": "A Brief History of Time",
+     "author": "Stephen Hawking",
+     "year": "1988"}
+   ]
+  }
+]
 }
